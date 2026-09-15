@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
@@ -46,6 +47,7 @@ export function LoginForm({ nextPath = "/store/vendas" }: { nextPath?: string })
       <button disabled={isSubmitting} type="submit" className="w-full rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50">
         {isSubmitting ? "Entrando..." : "Entrar"}
       </button>
+      <p className="text-center text-sm text-slate-400">Ainda não possui uma conta? <Link href="/cadastro" className="text-cyan-300 hover:text-cyan-200">Criar cadastro</Link></p>
     </form>
   );
 }
