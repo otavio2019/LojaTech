@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
-import { getProducts } from "@/lib/services/product-service";
-import { getSalesSummary } from "@/lib/services/sales-service";
+import { getProductsFromDatabase } from "@/lib/services/product-service";
+import { getSalesSummaryFromDatabase } from "@/lib/services/sales-service";
 import { formatCurrency, formatNumber } from "@/lib/formatters";
 
-export default function Home() {
-  const products = getProducts();
-  const summary = getSalesSummary();
+export default async function Home() {
+  const products = await getProductsFromDatabase();
+  const summary = await getSalesSummaryFromDatabase();
 
   return (
     <main className="flex-1">

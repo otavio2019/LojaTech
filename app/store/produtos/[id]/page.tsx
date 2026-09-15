@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Card } from "@/components/ui/card";
-import { getProductById } from "@/lib/services/product-service";
+import { getProductByIdFromDatabase } from "@/lib/services/product-service";
 import { formatCurrency, formatDate } from "@/lib/formatters";
 
 export function generateStaticParams() {
@@ -10,7 +10,7 @@ export function generateStaticParams() {
 
 export default async function ProdutoDetalhePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const product = getProductById(id);
+  const product = await getProductByIdFromDatabase(id);
   if (!product) notFound();
   const margin = ((product.preco - product.custo) / product.preco) * 100;
 
