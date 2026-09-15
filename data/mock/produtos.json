@@ -1,0 +1,38 @@
+[
+  {
+    "id_produto": "prod-001",
+    "nome": "Teclado Mecânico RGB",
+    "categoria": "Periféricos",
+    "preco": 249.9,
+    "custo": 150,
+    "estoque": 12,
+    "descricao": "Teclado mecânico com iluminação RGB.",
+    "imagem": "/images/teclado.jpg",
+    "avaliacao": 4.8,
+    "data_cadastro": "2026-01-10"
+  },
+  {
+    "id_produto": "prod-002",
+    "nome": "Mouse Gamer",
+    "categoria": "Periféricos",
+    "preco": 129.9,
+    "custo": 70,
+    "estoque": 25,
+    "descricao": "Mouse gamer com sensor de alta precisão.",
+    "imagem": "/images/mouse.jpg",
+    "avaliacao": 4.6,
+    "data_cadastro": "2026-01-12"
+  },
+  {
+    "id_produto": "prod-003",
+    "nome": "Monitor 24 Polegadas",
+    "categoria": "Monitores",
+    "preco": 899.9,
+    "custo": 620,
+    "estoque": 5,
+    "descricao": "Monitor Full HD de 24 polegadas.",
+    "imagem": "/images/monitor.jpg",
+    "avaliacao": 4.7,
+    "data_cadastro": "2026-01-15"
+  }
+]
