@@ -1,0 +1,6 @@
+[
+  {"id_venda":"ven-001","id_cliente":"cli-001","id_produto":"prod-001","data_venda":"2026-03-03","quantidade":1,"valor_unitario":249.90,"valor_total":249.90,"forma_pagamento":"pix"},
+  {"id_venda":"ven-002","id_cliente":"cli-002","id_produto":"prod-002","data_venda":"2026-03-05","quantidade":2,"valor_unitario":129.90,"valor_total":259.80,"forma_pagamento":"credito"},
+  {"id_venda":"ven-003","id_cliente":"cli-003","id_produto":"prod-003","data_venda":"2026-03-08","quantidade":1,"valor_unitario":899.90,"valor_total":899.90,"forma_pagamento":"debito"},
+  {"id_venda":"ven-004","id_cliente":"cli-001","id_produto":"prod-002","data_venda":"2026-03-10","quantidade":1,"valor_unitario":129.90,"valor_total":129.90,"forma_pagamento":"pix"}
+]

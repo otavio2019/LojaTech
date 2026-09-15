@@ -1,0 +1,5 @@
+[
+  {"id_cliente":"cli-001","nome":"Ana Beatriz Lima","cidade":"João Pessoa","estado":"PB","data_cadastro":"2026-02-02","email":"ana.lima@email.com"},
+  {"id_cliente":"cli-002","nome":"Carlos Eduardo Souza","cidade":"Campina Grande","estado":"PB","data_cadastro":"2026-02-08","email":"carlos.souza@email.com"},
+  {"id_cliente":"cli-003","nome":"Mariana Alves","cidade":"Recife","estado":"PE","data_cadastro":"2026-02-15","email":"mariana.alves@email.com"}
+]

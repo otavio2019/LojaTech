@@ -1,69 +1,42 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Card } from "@/components/ui/card";
+import { getProducts } from "@/lib/services/product-service";
+import { getSalesSummary } from "@/lib/services/sales-service";
+import { formatCurrency, formatNumber } from "@/lib/formatters";
 
 export default function Home() {
+  const products = getProducts();
+  const summary = getSalesSummary();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="flex-1">
+      <section className="mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+        <div>
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">Tecnologia sem complicação</p>
+          <h1 className="max-w-3xl text-5xl font-bold tracking-tight text-white sm:text-6xl">Tecnologia que acompanha o seu ritmo.</h1>
+          <p className="mt-6 max-w-xl text-lg leading-8 text-slate-300">Conheça a LojaTech, uma experiência de loja moderna com produtos selecionados e dados organizados para decisões melhores.</p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link href="/store/produtos" className="rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 hover:bg-cyan-300">Ver produtos</Link>
+            <Link href="/store/vendas" className="rounded-xl border border-white/15 px-5 py-3 font-semibold text-white hover:border-cyan-400 hover:text-cyan-300">Acompanhar vendas</Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-cyan-400/15 to-blue-500/5 p-8 shadow-2xl shadow-cyan-950/40">
+          <p className="text-sm text-slate-300">Visão rápida da operação</p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+            <Metric label="Faturamento" value={formatCurrency(summary.revenue)} />
+            <Metric label="Vendas" value={formatNumber(summary.totalSales)} />
+            <Metric label="Unidades" value={formatNumber(summary.units)} />
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+      <section className="mx-auto max-w-7xl px-6 pb-20">
+        <div className="mb-6 flex items-end justify-between"><div><p className="text-sm text-cyan-400">Destaques</p><h2 className="mt-1 text-3xl font-bold">Produtos em evidência</h2></div><Link href="/store/produtos" className="text-sm text-slate-300 hover:text-cyan-300">Ver catálogo →</Link></div>
+        <div className="grid gap-5 md:grid-cols-3">
+          {products.map((product) => <Card key={product.id_produto}><p className="text-sm text-cyan-400">{product.categoria}</p><h3 className="mt-3 text-xl font-semibold">{product.nome}</h3><p className="mt-3 text-2xl font-bold">{formatCurrency(product.preco)}</p><p className="mt-2 text-sm text-slate-400">{product.estoque} unidades em estoque</p></Card>)}
+        </div>
+      </section>
+    </main>
   );
 }
+
+function Metric({ label, value }: { label: string; value: string }) { return <div><p className="text-xs uppercase tracking-wider text-slate-400">{label}</p><p className="mt-1 text-xl font-bold text-white">{value}</p></div>; }
