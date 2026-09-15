@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import { productSchema } from "@/lib/validations/product-schema";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { getAuthenticatedUser } from "@/lib/supabase/auth-server";
 
 export async function POST(request: Request) {
   try {
+    if (!await getAuthenticatedUser()) return NextResponse.json({ error: "Faça login para continuar." }, { status: 401 });
     const parsed = productSchema.safeParse(await request.json());
     if (!parsed.success) return NextResponse.json({ error: "Dados do produto inválidos.", details: parsed.error.flatten().fieldErrors }, { status: 400 });
     const supabase = getSupabaseServerClient();

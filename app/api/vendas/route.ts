@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import { saleSchema } from "@/lib/validations/sale-schema";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { getAuthenticatedUser } from "@/lib/supabase/auth-server";
 
 export async function POST(request: Request) {
   try {
+    if (!await getAuthenticatedUser()) return NextResponse.json({ error: "Faça login para continuar." }, { status: 401 });
     const body = await request.json();
     const parsed = saleSchema.safeParse(body);
     if (!parsed.success) {
