@@ -31,7 +31,15 @@ export function SignupForm() {
       const supabase = createSupabaseBrowserClient();
       const { data, error } = await supabase.auth.signUp({ email, password });
       if (error) {
-        setMessage({ type: "error", text: error.message.toLowerCase().includes("already registered") ? "Este e-mail já está cadastrado." : "Não foi possível criar a conta." });
+        const normalizedError = error.message.toLowerCase();
+        const text = normalizedError.includes("already registered")
+          ? "Este e-mail já está cadastrado."
+          : normalizedError.includes("rate limit")
+            ? "Limite de tentativas atingido. Aguarde alguns minutos e tente novamente."
+            : normalizedError.includes("email") && normalizedError.includes("send")
+              ? "A conta pode ter sido criada, mas o e-mail de confirmação não foi enviado. Confira o SMTP do Supabase."
+              : `Não foi possível criar a conta: ${error.message}`;
+        setMessage({ type: "error", text });
         return;
       }
 
