@@ -12,7 +12,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Dados da venda inválidos.", details: parsed.error.flatten().fieldErrors }, { status: 400 });
     }
 
-    const supabase = getSupabaseServerClient();
+    const supabase = await getSupabaseServerClient();
     if (!supabase) return NextResponse.json({ error: "Supabase não configurado no servidor." }, { status: 503 });
 
     const { id_cliente, id_produto, quantidade, forma_pagamento } = parsed.data;

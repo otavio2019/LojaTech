@@ -3,7 +3,7 @@ import type { Venda } from "@/types/venda";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 export async function getSalesFromDatabase(): Promise<Venda[]> {
-  const supabase = getSupabaseServerClient();
+  const supabase = await getSupabaseServerClient();
   if (!supabase) return getSales();
   const { data, error } = await supabase.from("vendas").select("*").order("data_venda", { ascending: false });
   if (error) {
