@@ -1,8 +1,7 @@
-import { Card } from "@/components/ui/card";
+import { ProductCatalog } from "@/components/products/product-catalog";
 import { getProducts } from "@/lib/services/product-service";
-import { formatCurrency, formatDate } from "@/lib/formatters";
 
 export default function ProdutosPage() {
   const products = getProducts();
-  return <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-16"><div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">Catálogo</p><h1 className="mt-3 text-4xl font-bold">Produtos</h1><p className="mt-3 text-slate-400">{products.length} produtos cadastrados no catálogo mock.</p></div></div><div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{products.map((product) => <Card key={product.id_produto} className="flex flex-col"><div className="flex items-start justify-between gap-4"><span className="rounded-full bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-300">{product.categoria}</span><span className="text-sm text-amber-300">★ {product.avaliacao}</span></div><h2 className="mt-5 text-xl font-semibold">{product.nome}</h2><p className="mt-2 flex-1 text-sm leading-6 text-slate-400">{product.descricao}</p><div className="mt-6 flex items-end justify-between"><div><p className="text-2xl font-bold text-white">{formatCurrency(product.preco)}</p><p className="mt-1 text-xs text-slate-500">Cadastrado em {formatDate(product.data_cadastro)}</p></div><span className={`text-sm font-medium ${product.estoque <= 5 ? "text-amber-300" : "text-emerald-300"}`}>{product.estoque} em estoque</span></div></Card>)}</div></main>;
+  return <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-16"><div><p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">Catálogo</p><h1 className="mt-3 text-4xl font-bold">Produtos</h1><p className="mt-3 text-slate-400">Encontre o equipamento ideal para o seu setup.</p></div><ProductCatalog products={products} /></main>;
 }
