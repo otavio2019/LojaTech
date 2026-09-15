@@ -7,6 +7,7 @@ const links = [
   { href: "/store/produtos", label: "Produtos" },
   { href: "/store/clientes", label: "Clientes" },
   { href: "/store/vendas", label: "Vendas" },
+  { href: "/store/dashboard", label: "Dashboard" },
 ];
 
 export async function Header() {
@@ -19,7 +20,7 @@ export async function Header() {
           <span className="text-lg">Loja<span className="text-cyan-400">Tech</span></span>
         </Link>
         <nav className="hidden items-center gap-6 text-sm text-slate-300 sm:flex" aria-label="Navegação principal">
-          {links.filter((link) => user || !["/store/clientes", "/store/vendas"].includes(link.href)).map((link) => <Link key={link.href} href={link.href} className="hover:text-cyan-300">{link.label}</Link>)}
+          {links.filter((link) => user || !["/store/clientes", "/store/vendas", "/store/dashboard"].includes(link.href)).map((link) => <Link key={link.href} href={link.href} className="hover:text-cyan-300">{link.label}</Link>)}
         </nav>
         <div className="flex items-center gap-4">
           {user ? <LogoutButton /> : <Link href="/login" className="text-sm text-slate-300 hover:text-cyan-300">Entrar</Link>}
